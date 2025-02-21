@@ -217,7 +217,7 @@ def gen_data(
     if gametype == "minimax all":
         _, moves = gen_games("all")
         data, encoded_labels = gen_data_minimax_encoded_labels(moves)
-    if gametype == "prob all":
+    elif gametype == "prob all":
         _, moves = gen_games("all")
         data, encoded_labels = gen_data_prob_encoded_labels(moves)
     else:

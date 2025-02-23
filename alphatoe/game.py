@@ -78,6 +78,7 @@ class Board:
             (0, 4, 8): "top left -> bottom right",
             (2, 4, 6): "bottom left -> top right",
         }
+        # self.winner = ""  # ADDED
         for condition in win_conditions.keys():
             if (
                 self.grid[condition[0]]
@@ -236,26 +237,30 @@ def get_all_minimax_games(
     minimax_turn: bool,
     finished_boards: Optional[list[Board]] = None,
 ) -> list[Board]:
-    print("--- get_all_minimax_games", len(boards), minimax_turn, finished_boards)
+    # print("--- get_all_minimax_games", len(boards), minimax_turn, finished_boards)
     if finished_boards == None:
         finished_boards = []
+    # if len(finished_boards) % 100 == 0 or len(finished_boards) == 1:
+    print(len(finished_boards))
     ongoing_boards = []
     if minimax_turn:
         move_getter = get_best_moves
     else:
         move_getter = get_possible_moves
     for board in boards:
-        print("board.game_state: ", board.game_state)
-        board.draw_board()
+        # print("board.game_state: ", board.game_state)
+        # print(board.set_game_state())
+        # board.draw_board()
+        # print(board.grid)
         if board.game_state != State.ONGOING:
             finished_boards.append(board)
         else:
-            print(move_getter(board))
+            # print(move_getter(board))
             for move in move_getter(board):
                 _board = deepcopy(board)
                 _board.make_move(move)
                 ongoing_boards.append(_board)
-    print("ongoing_boards: ", ongoing_boards)
+    # print("ongoing_boards: ", ongoing_boards)
     if ongoing_boards == []:
         return finished_boards
     else:

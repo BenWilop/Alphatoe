@@ -26,6 +26,9 @@ class Board:
         self.winner = ""
         self.win_conditions = []
 
+        self._prev_winner = ""
+        self._prev_win_conditions = []
+
     # Internal
     def swap_turn(self) -> None:
         match self.turn:
@@ -60,6 +63,10 @@ class Board:
     def make_move(self, move: int):
         if move not in self.get_possible_moves():
             raise ValueError(f"{move} is not a valid move nerd!!")
+        
+        self._prev_winner = self.winner
+        self._prev_win_conditions = self.win_conditions.copy()
+
         self.grid[move] = self.turn
         self.moves_played.append(move)
         self.game_state = self.set_game_state()
@@ -107,6 +114,8 @@ class Board:
         last_move = self.moves_played.pop()
         self.grid[last_move] = " "
         self.game_state = State.ONGOING
+        self.winner = self._prev_winner
+        self.win_conditions = self._prev_win_conditions
         self.swap_turn()
 
     # External

@@ -236,6 +236,7 @@ def get_all_minimax_games(
     minimax_turn: bool,
     finished_boards: Optional[list[Board]] = None,
 ) -> list[Board]:
+    print("--- get_all_minimax_games", len(boards), minimax_turn, finished_boards)
     if finished_boards == None:
         finished_boards = []
     ongoing_boards = []
@@ -244,13 +245,17 @@ def get_all_minimax_games(
     else:
         move_getter = get_possible_moves
     for board in boards:
+        print("board.game_state: ", board.game_state)
+        board.draw_board()
         if board.game_state != State.ONGOING:
             finished_boards.append(board)
         else:
+            print(move_getter(board))
             for move in move_getter(board):
                 _board = deepcopy(board)
                 _board.make_move(move)
                 ongoing_boards.append(_board)
+    print("ongoing_boards: ", ongoing_boards)
     if ongoing_boards == []:
         return finished_boards
     else:

@@ -171,7 +171,9 @@ def minimax(board: Board) -> int:
     if board.game_state == State.DRAW:
         return 0
     elif board.game_state == State.OVER:
-        return 10 if board.turn == "O" else -10
+        # return 10 if board.turn == "O" else -10
+        # Strong rules:
+        return -10 if board.turn == "O" else 10
 
     scores: list[int] = []
     for move in board.get_possible_moves():

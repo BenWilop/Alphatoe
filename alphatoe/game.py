@@ -95,10 +95,10 @@ class Board:
             ):
                 self.winner = self.grid[condition[0]]
                 ### Strong rules
-                if self.winner == "X":
-                    self.winner = "O"
-                elif self.winner == "O":
-                    self.winner = "X"
+                #if self.winner == "X":
+                #    self.winner = "O"
+                #elif self.winner == "O":
+                #    self.winner = "X"
                 ###
                 self.win_conditions.append(win_conditions[condition])
         if self.winner != "":

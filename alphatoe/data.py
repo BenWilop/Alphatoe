@@ -54,7 +54,6 @@ def gen_games(gametype: str = "all"):
 
     return games, moves
 
-
 def gen_data_labels(moves: Tensor) -> tuple[Tensor, Tensor]:
     data = moves[:, :-1]
     labels = moves[:, 1:]

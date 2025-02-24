@@ -94,6 +94,12 @@ class Board:
                 != " "
             ):
                 self.winner = self.grid[condition[0]]
+                ### Strong rules
+                if self.winner == "X":
+                    self.winner = "O"
+                elif self.winner == "O":
+                    self.winner = "X"
+                ###
                 self.win_conditions.append(win_conditions[condition])
         if self.winner != "":
             return State.OVER
@@ -250,7 +256,7 @@ def get_all_minimax_games(
     if finished_boards == None:
         finished_boards = []
     # if len(finished_boards) % 100 == 0 or len(finished_boards) == 1:
-    print(len(finished_boards))
+    # print(len(finished_boards))
     ongoing_boards = []
     if minimax_turn:
         move_getter = get_best_moves
